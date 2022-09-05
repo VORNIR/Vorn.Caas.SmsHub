@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<PackageId>Vorn.Caas.SmsHub</PackageId>
-		<Version>0.3.0</Version>
+		<Version>0.3.1</Version>
 		<Company>Vorn</Company>
 		<PackageDescription>Vorn Caas SmsHub Class</PackageDescription>
 		<RepositoryUrl>https://github.com/VORNIR/Vorn.Caas.SmsHub</RepositoryUrl>
