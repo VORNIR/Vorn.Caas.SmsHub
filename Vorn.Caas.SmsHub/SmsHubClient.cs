@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 internal class SmsHubClient : HubClient<SmsHubConfiguration>, ISmsHub
 {
     public EventHandler<Sms> Received { get; set; }
+    public EventHandler<Sms> Sent { get; set; }
     public SmsHubClient(IOptions<SmsHubConfiguration> options, IEntityHubClient<Sms> entityHub) : base(options.Value)
     {
         entityHub.NotifyChanges += (s, c) =>
@@ -12,6 +13,8 @@ internal class SmsHubClient : HubClient<SmsHubConfiguration>, ISmsHub
             {
                 if(entity.State == EntityState.Added && entity.Entity.Incoming)
                     Received?.Invoke(this, entity.Entity);
+                if(entity.State == EntityState.Added && !entity.Entity.Incoming)
+                    Sent?.Invoke(this, entity.Entity);
             }
         };
     }
