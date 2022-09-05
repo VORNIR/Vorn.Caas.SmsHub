@@ -8,4 +8,5 @@ public interface ISmsHub
     Task<Sms> Reload(int id);
     Task<int> Count();
     EventHandler<Sms> Received { get; set; }
+    EventHandler<Sms> Sent { get; set; }
 }
