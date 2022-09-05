@@ -1,0 +1,23 @@
+name: Release
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+jobs:
+    release-on-push:
+      runs-on: ubuntu-latest
+      steps:
+          - name: Checkout
+            uses: actions/checkout@v2  
+          - name: Add Source
+            run: dotnet nuget add source https://nuget.pkg.github.com/VORNIR/index.json -n "Vorn" --username mobinseven --password  ${{ secrets.GH_PAT }} --store-password-in-clear-text
+          - name: Get Tag
+            id: github_ref
+            run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+          - name: Create a Release
+            uses: elgohr/Github-Release-Action@v4
+            env:
+              GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+            with:
+              title: ${{ steps.github_ref.outputs.tag }}
